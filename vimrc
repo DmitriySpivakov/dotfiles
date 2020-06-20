@@ -13,6 +13,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'pechorin/any-jump.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'andymass/vim-matchup'
 
 " fuzzy search
 Plug 'junegunn/fzf'
@@ -31,8 +32,10 @@ Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-bundler'
 
-call plug#end()
+" rails
+Plug 'tpope/vim-rails'
 
+call plug#end()
 
 let mapleader = " "
 
@@ -53,6 +56,9 @@ set smartindent
 
 colorscheme gruvbox
 
+" enable built-in delimiters matcher
+runtime macros/matchit.vim
+
 " indentline
 let g:indentLine_color_term = 239
 let g:indentLine_char = '¦'
@@ -64,6 +70,8 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 
+" rubocop shortcut
+:command RubocopFx :!(rubocop --safe-auto-correct '%:p') > /dev/null
 
 " NERDtree conf
 " Open nerdtree if a dir was specified
@@ -101,6 +109,8 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 map <C-n> :Files<cr>
 map <leader><C-f> :Ag<cr>
 map <C-s> :w<cr>
+map <leader><c-r> :!rm .tags; ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) -f .tags<cr>
+noremap <silent> <leader>ff :RubocopFx<cr><cr>
 
 " clipboard integration
 set clipboard=unnamedplus

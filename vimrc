@@ -105,12 +105,6 @@ let g:any_jump_colors = {
 let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal' } }
 " List hidden files
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
-" key bindings
-map <C-n> :Files<cr>
-map <leader><C-f> :Ag<cr>
-map <C-s> :w<cr>
-map <leader><c-r> :!rm .tags; ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) -f .tags<cr>
-noremap <silent> <leader>ff :RubocopFx<cr><cr>
 
 " clipboard integration
 set clipboard=unnamedplus
@@ -124,4 +118,22 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
+
+" key bindings
+" nav
+noremap <C-n> :Files<cr>
+noremap <leader><C-f> :Ag<cr>
+" native features shortcuts
+noremap <C-s> :w<cr>
+" bundle tags
+noremap <leader><c-r> :!rm .tags; ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) -f .tags<cr>
+" rubocop autofx
+noremap <silent> <leader>ff :RubocopFx<cr><cr>
+" git
+noremap <leader>gs :Gstatus<cr>
+noremap <leader>gc :Git commit<cr>
+noremap <leader>gp :Git push<cr>
+noremap <leader>gb :Git blame<cr>
+noremap <leader>gds :Gdiffsplit<cr>
+noremap <leader>gm :Git mergetool<cr>
 

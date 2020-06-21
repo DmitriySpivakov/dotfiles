@@ -11,9 +11,11 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
-Plug 'pechorin/any-jump.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'andymass/vim-matchup'
+
+" nav
+Plug 'pechorin/any-jump.vim'
 
 " fuzzy search
 Plug 'junegunn/fzf'
@@ -41,22 +43,23 @@ let mapleader = " "
 
 set autoread
 
+" display row nums config
 set number
 set relativenumber
 set ruler
 
 set incsearch
 
+" indentation
 set expandtab
 set shiftwidth=2
 set backspace=2
-
 set autoindent
 set smartindent
 
 colorscheme gruvbox
 
-" enable built-in delimiters matcher
+" enable built-in delimiters matcher (if/unless/do - end)
 runtime macros/matchit.vim
 
 " indentline
@@ -64,11 +67,11 @@ let g:indentLine_color_term = 239
 let g:indentLine_char = '¦'
 
 " syntastic
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 let g:syntastic_ruby_rubocop_exec = '$HOME/scripts/syntastic_rubocop_exec.sh'
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
 " rubocop shortcut
 :command RubocopFx :!(rubocop --safe-auto-correct '%:p') > /dev/null
@@ -82,24 +85,6 @@ let NERDTreeShowHidden=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " toggle proj tree w/ Ctrl+n
 map <F2> :NERDTreeToggle<cr>
-
-" any-jump colors config
-let g:any_jump_colors = {
-      \"plain_text":         "Comment",
-      \"preview":            "Comment",
-      \"preview_keyword":    "Operator",
-      \"heading_text":       "Function",
-      \"heading_keyword":    "Identifier",
-      \"group_text":         "Comment",
-      \"group_name":         "Function",
-      \"more_button":        "Operator",
-      \"more_explain":       "Comment",
-      \"result_line_number": "Comment",
-      \"result_text":        "Statement",
-      \"result_path":        "String",
-      \"help":               "Comment"
-      \}
-
 
 " FZF
 let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal' } }
@@ -119,12 +104,36 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
+" any-jump
+let g:any_jump_colors = {
+      \"plain_text":         "Comment",
+      \"preview":            "Comment",
+      \"preview_keyword":    "Operator",
+      \"heading_text":       "Function",
+      \"heading_keyword":    "Identifier",
+      \"group_text":         "Comment",
+      \"group_name":         "Function",
+      \"more_button":        "Operator",
+      \"more_explain":       "Comment",
+      \"result_line_number": "Comment",
+      \"result_text":        "Statement",
+      \"result_path":        "String",
+      \"help":               "Comment"
+      \}
+let g:any_jump_disable_default_keybindings = 1
+" Normal mode: Jump to definition under cursore
+nnoremap <leader>ajj :AnyJump<CR>
+" Visual mode: jump to selected text in visual mode
+xnoremap <leader>ajj :AnyJumpVisual<CR>
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ajb :AnyJumpBack<CR>
+" Normal mode: open last closed search window again
+nnoremap <leader>ajl :AnyJumpLastResults<CR>
+
 " key bindings
 " nav
 noremap <C-n> :Files<cr>
 noremap <leader><C-f> :Ag<cr>
-" native features shortcuts
-noremap <C-s> :w<cr>
 " bundle tags
 noremap <leader><c-r> :!rm .tags; ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) -f .tags<cr>
 " rubocop autofx
@@ -136,4 +145,10 @@ noremap <leader>gp :Git push<cr>
 noremap <leader>gb :Git blame<cr>
 noremap <leader>gds :Gdiffsplit<cr>
 noremap <leader>gm :Git mergetool<cr>
+" native features shortcuts
+noremap <C-s> :w<cr>
+noremap <leader>j <C-w>j<cr>
+noremap <leader>k <C-w>k<cr>
+noremap <leader>h <C-w>h<cr>
+noremap <leader>l <C-w>l<cr>
 

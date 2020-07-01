@@ -1,0 +1,12 @@
+{
+  "solargraph": {
+    "useBundler": true,
+    "checkGemVersion": true,
+    "completion": true,
+    "symbols": true,
+    "definitions": true,
+    "references": true,
+    "hover": true,
+    "promptDownload": true
+  }
+}

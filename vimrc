@@ -14,6 +14,9 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 Plug 'andymass/vim-matchup'
 
+" ergonomics
+Plug 'easymotion/vim-easymotion'
+
 " semantic completion
 Plug 'neoclide/coc.nvim'
 
@@ -35,7 +38,6 @@ Plug 'tpope/vim-repeat'
 Plug 'vim-ruby/vim-ruby'
 Plug 'neoclide/coc-solargraph'
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-endwise'
 
 " rails
 Plug 'tpope/vim-rails'
@@ -249,9 +251,6 @@ let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'borde
 " List hidden files
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
-" clipboard integration
-set clipboard=unnamedplus
-
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -266,8 +265,12 @@ let g:airline#extensions#syntastic#enabled = 1
 " nav
 noremap <C-n> :Files<cr>
 noremap <leader><C-f> :Ag<cr>
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 noremap <F2> :NERDTreeToggle<cr>
 noremap <leader>nf :NERDTreeFind<cr>
+" easymotion
+map  <Leader><Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
 " bundle tags & solargraph index
 noremap <leader><c-r> :!rm tags; ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths); bundle exec solargraph scan -v<cr>

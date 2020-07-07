@@ -272,6 +272,9 @@ noremap <leader>nf :NERDTreeFind<cr>
 map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
+" cp to clipboard
+vnoremap <Leader>ys :w !xclip -i -sel c<CR><CR>
+
 " bundle tags & solargraph index
 noremap <leader><c-r> :!rm tags; ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths); bundle exec solargraph scan -v<cr>
 

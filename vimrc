@@ -34,6 +34,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
+" tests
+Plug 'vim-test/vim-test'
+
 " ruby
 Plug 'vim-ruby/vim-ruby'
 Plug 'neoclide/coc-solargraph'
@@ -261,6 +264,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
+" vim test
+let test#strategy = "neovim"
+
 " key bindings
 " nav
 noremap <C-n> :Files<cr>
@@ -295,3 +301,10 @@ noremap <leader>j <C-w>j<cr>
 noremap <leader>k <C-w>k<cr>
 noremap <leader>h <C-w>h<cr>
 noremap <leader>l <C-w>l<cr>
+
+" tests
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>

@@ -1,12 +1,12 @@
 {
   "solargraph": {
-    "useBundler": true,
-    "checkGemVersion": true,
+    "commandPath": "/home/dmitriy/.rvm/gems/ruby-2.7.1/bin/solargraph",
+    "checkGemVersion": false,
     "completion": true,
     "symbols": true,
     "definitions": true,
     "references": true,
     "hover": true,
-    "promptDownload": true
+    "promptDownload": false
   }
 }

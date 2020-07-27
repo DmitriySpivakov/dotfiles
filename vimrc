@@ -9,10 +9,13 @@ call plug#begin('~/.vim/plugged')
 " interface
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 Plug 'andymass/vim-matchup'
+
+" nav
+Plug 'scrooloose/nerdtree'
+Plug 'jeetsukumaran/vim-buffergator'
 
 " ergonomics
 Plug 'easymotion/vim-easymotion'
@@ -270,10 +273,14 @@ let test#strategy = "neovim"
 " key bindings
 " nav
 noremap <C-n> :Files<cr>
+
 noremap <leader><C-f> :Ag<cr>
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <leader>f :Ag <C-R><C-W><CR>
+
 noremap <F2> :NERDTreeToggle<cr>
 noremap <leader>nf :NERDTreeFind<cr>
+" clear search highlight
+noremap <leader>cs :let @/ = ""<cr>
 " easymotion
 map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)

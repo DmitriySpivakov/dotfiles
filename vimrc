@@ -28,7 +28,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 " code checks
-Plug 'scrooloose/syntastic'
+Plug 'dense-analysis/ale'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -81,13 +81,35 @@ runtime macros/matchit.vim
 let g:indentLine_color_term = 239
 let g:indentLine_char = '¦'
 
-" syntastic
-let g:syntastic_ruby_rubocop_exec = '$HOME/scripts/syntastic_rubocop_exec.sh'
-let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+" lint
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_ruby_ruby_executable = 'ruby'
 
+let g:ale_echo_cursor = 1
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_format = '%code: %%s'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_enabled = 1
+let g:ale_fix_on_save = 0
+let g:ale_fixers = {'ruby': ['rubocop']}
+let g:ale_keep_list_window_open = 0
+let g:ale_lint_delay = 200
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_linter_aliases = {}
+let g:ale_linters = {'ruby': ['ruby', 'rubocop']}
+let g:ale_open_list = 0
+let g:ale_set_highlights = 1
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_set_signs = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_offset = 1000000
+let g:ale_sign_warning = '--'
+let g:ale_statusline_format = ['%d error(s)', '%d warning(s)', 'OK']
+let g:ale_warn_about_trailing_whitespace = 1
 " coc config
 " START
 " TextEdit might fail if hidden is not set.
@@ -286,7 +308,7 @@ map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
 " cp to clipboard
-vnoremap <Leader>ys :w !xclip -i -sel c<CR><CR>
+vnoremap <Leader>yc :w !xclip -i -sel c<CR><CR>
 
 " bundle tags & solargraph index
 noremap <leader><c-r> :!rm tags; ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths); bundle exec solargraph scan -v<cr>

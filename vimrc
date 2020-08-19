@@ -274,11 +274,6 @@ let NERDTreeShowHidden=1
 " close vim if proj structure is the only buff left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" FZF
-let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal' } }
-" List hidden files
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
-
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -292,12 +287,28 @@ let g:airline#extensions#syntastic#enabled = 1
 " vim test
 let test#strategy = "neovim"
 
+" Custom Rg 
+command! -bang -nargs=* RgRuby
+  \ call fzf#vim#grep(
+  \   'rg -t ruby -g ''!*_spec.rb'' --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+
+command! -bang -nargs=* RgSpec
+  \ call fzf#vim#grep(
+  \   'rg -t ruby -g ''*_spec.rb'' --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
 " key bindings
 " nav
 noremap <C-n> :Files<cr>
 
-noremap <leader><C-f> :Ag<cr>
-nnoremap <leader>f :Ag <C-R><C-W><CR>
+noremap <leader>fr :RgRuby <CR>
+nnoremap <leader>FR :RgRuby <C-R><C-W><CR>
+noremap <leader>fs :RgSpec <CR>
+nnoremap <leader>FS :RgSpec <C-R><C-W><CR>
+noremap <leader>fa :Rg <CR>
+nnoremap <leader>FA :Rg <C-R><C-W><CR>
 
 noremap <F2> :NERDTreeToggle<cr>
 noremap <leader>nf :NERDTreeFind<cr>
@@ -326,10 +337,10 @@ noremap <leader>gm :Git mergetool<cr>
 
 " native features shortcuts
 noremap <C-s> :w<cr>
-noremap <leader>j <C-w>j<cr>
-noremap <leader>k <C-w>k<cr>
-noremap <leader>h <C-w>h<cr>
-noremap <leader>l <C-w>l<cr>
+noremap <leader>j <C-w>j
+noremap <leader>k <C-w>k
+noremap <leader>h <C-w>h
+noremap <leader>l <C-w>l
 
 " tests
 nmap <silent> <leader>tn :TestNearest<CR>
